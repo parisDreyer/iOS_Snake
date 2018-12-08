@@ -101,7 +101,7 @@ class GameScene: SKScene {
     private func initializeGameView() {
         currentScore = SKLabelNode(fontNamed: "ArielRoundedMTBold")
         currentScore.zPosition = 1
-        currentScore.position = CGPoint(x: 0, y: (frame.size.height / -2))
+        currentScore.position = CGPoint(x: 0, y: (frame.size.height / -2) + 10)
         currentScore.fontSize = 40
         currentScore.isHidden = true
         currentScore.text = "Score: 0"
@@ -122,7 +122,7 @@ class GameScene: SKScene {
         let cellWidth: CGFloat = 27.5
         let numRows = 40
         let numCols = 20
-        var x = CGFloat(width/02) + (cellWidth / 2)
+        var x = CGFloat(width / -2) + (cellWidth / 2)
         var y = CGFloat(height / 2) - (cellWidth / 2)
         // loop through rows and columns, create cells
         for i in 0...numRows - 1 {

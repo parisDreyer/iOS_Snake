@@ -148,14 +148,14 @@ class GameManager {
         if scene.playerPositions.count > 0 {
             let x = scene.playerPositions[0].1
             let y = scene.playerPositions[0].0
-            if y > 40 {
+            if y > 39 {
                 scene.playerPositions[0].0 = 0
             } else if y < 0 {
-                scene.playerPositions[0].0 = 40
-            } else if x > 20 {
+                scene.playerPositions[0].0 = 39
+            } else if x > 19 {
                 scene.playerPositions[0].1 = 0
             } else if x < 0 {
-                scene.playerPositions[0].1 = 20
+                scene.playerPositions[0].1 = 19
             }
         }
         renderChange()
