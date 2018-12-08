@@ -13,7 +13,7 @@ class GameManager {
     var scene: GameScene!
     
     var nextTime: Double?
-    var timeExtension: Double = 1
+    var timeExtension: Double = 0.15
     var playerDirection: Int = 4 // 1 == left, 2 == up, 3 == right, 4 == down
     
     init(scene: GameScene){
@@ -88,6 +88,28 @@ class GameManager {
             }
             scene.playerPositions[0] = (scene.playerPositions[0].0 + yChange, scene.playerPositions[0].1 + xChange)
         }
+        
+        if scene.playerPositions.count > 0 {
+            let x = scene.playerPositions[0].1
+            let y = scene.playerPositions[0].0
+            if y > 40 {
+                scene.playerPositions[0].0 = 0
+            } else if y < 0 {
+                scene.playerPositions[0].0 = 40
+            } else if x > 20 {
+                scene.playerPositions[0].1 = 0
+            } else if x < 0 {
+                scene.playerPositions[0].1 = 20
+            }
+        }
         renderChange()
+    }
+    
+    func swipe(ID: Int) {
+        if !(ID == 2 && playerDirection == 4) && !(ID == 4 && playerDirection == 2) {
+            if !(ID == 1 && playerDirection == 3) && !(ID == 3 && playerDirection == 1) {
+                playerDirection = ID
+            }
+        }
     }
 }
