@@ -72,6 +72,18 @@ class GameManager {
                 updatePlayerPosition()
                 
                 checkForScore()
+                checkForDeath()
+            }
+        }
+    }
+    
+    private func checkForDeath() {
+        if scene.playerPositions.count > 0 {
+            var arrayOfPositions = scene.playerPositions
+            let headOfSnake = arrayOfPositions[0]
+            arrayOfPositions.remove(at: 0)
+            if contains(a: arrayOfPositions, v: headOfSnake) {
+                playerDirection = 0
             }
         }
     }
@@ -116,6 +128,10 @@ class GameManager {
             xChange = 0
             yChange = 1
             break
+        case 0:
+            // dead
+            xChange = 0
+            yChange = 0
         default:
             break
         }
@@ -147,7 +163,9 @@ class GameManager {
     func swipe(ID: Int) {
         if !(ID == 2 && playerDirection == 4) && !(ID == 4 && playerDirection == 2) {
             if !(ID == 1 && playerDirection == 3) && !(ID == 3 && playerDirection == 1) {
-                playerDirection = ID
+                if playerDirection != 0 {
+                    playerDirection = ID
+                }
             }
         }
     }
