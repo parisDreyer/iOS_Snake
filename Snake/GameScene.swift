@@ -73,7 +73,7 @@ class GameScene: SKScene {
         bestScore.zPosition = 1
         bestScore.position = CGPoint(x: 0, y: gameLogo.position.y - 50)
         bestScore.fontSize = 40
-        bestScore.text = "Best Score: 0"
+        bestScore.text = "Best Score: \(UserDefaults.standard.integer(forKey: "bestScore"))"
         bestScore.fontColor = SKColor.white
         self.addChild(bestScore)
         
@@ -167,7 +167,7 @@ class GameScene: SKScene {
         playButton.run(SKAction.scale(to: 0, duration: 0.3)){
             self.playButton.isHidden = true
         }
-        let bottomCorner = CGPoint(x: 0, y: (frame.size.height / -2) + 20)
+        let bottomCorner = CGPoint(x: 0, y: currentScore.position.y + 42)//CGPoint(x: 0, y: (frame.size.height / -2) + 20)
         bestScore.run(SKAction.move(to: bottomCorner, duration: 0.4)){
             self.gameBG.setScale(0)
             self.currentScore.setScale(0)
