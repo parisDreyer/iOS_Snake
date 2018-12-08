@@ -15,6 +15,8 @@ class GameManager {
     var nextTime: Double?
     var timeExtension: Double = 0.15
     var playerDirection: Int = 4 // 1 == left, 2 == up, 3 == right, 4 == down
+    var currentScore: Int = 0
+    
     
     init(scene: GameScene){
         self.scene = scene
@@ -30,8 +32,14 @@ class GameManager {
     }
     
     private func generateNewPoint() {
-        let randomX = CGFloat(arc4random_uniform(19))
-        let randomY = CGFloat(arc4random_uniform(39))
+        var randomX = CGFloat(arc4random_uniform(19))
+        var randomY = CGFloat(arc4random_uniform(39))
+        
+        while contains(a: scene.playerPositions, v: (Int(randomX), Int(randomY))){
+            randomX = CGFloat(arc4random_uniform(19))
+            randomY = CGFloat(arc4random_uniform(39))
+        }
+        
         scene.scorePos = CGPoint(x: randomX, y: randomY)
     }
     
@@ -62,6 +70,25 @@ class GameManager {
             if time >= nextTime! {
                 nextTime = time + timeExtension
                 updatePlayerPosition()
+                
+                checkForScore()
+            }
+        }
+    }
+    
+    private func checkForScore() {
+        if scene.scorePos != nil {
+            let x = scene.playerPositions[0].0
+            let y = scene.playerPositions[0].1
+            if Int((scene.scorePos?.x)!) == y && Int((scene.scorePos?.y)!) == x {
+                currentScore += 1
+                scene.currentScore.text = "Score: \(currentScore)"
+                generateNewPoint()
+                
+                // grow the snake
+                scene.playerPositions.append(scene.playerPositions.last!)
+                scene.playerPositions.append(scene.playerPositions.last!)
+                scene.playerPositions.append(scene.playerPositions.last!)
             }
         }
     }
