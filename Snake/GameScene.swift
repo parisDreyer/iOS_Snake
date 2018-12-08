@@ -116,6 +116,7 @@ class GameScene: SKScene {
     
     override func update(_ currentTime: TimeInterval){
         // called before each frame is rendered
+        game!.update(time: currentTime)
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         for touch in touches {
